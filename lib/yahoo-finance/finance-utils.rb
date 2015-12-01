@@ -29,8 +29,8 @@ module YahooFinance
       names = []
       return names unless MARKETS[country][market]
       CSV.foreach(open(MARKETS[country][market].url)) do |row|
-        next if row.first == "Name"
-        names.push(row.first.gsub(" ", ""))
+        next if row.second == "Name"
+        names.push(row.second.gsub(" ", ""))
       end
       names
     end
