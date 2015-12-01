@@ -24,5 +24,15 @@ module YahooFinance
       end
       symbols
     end
+
+    def names_by_market(country, market)
+      names = []
+      return names unless MARKETS[country][market]
+      CSV.foreach(open(MARKETS[country][market].url)) do |row|
+        next if row.first == "Name"
+        names.push(row.first.gsub(" ", ""))
+      end
+      names
+    end
   end
 end
